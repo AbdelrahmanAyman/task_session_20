@@ -1,0 +1,127 @@
+.app-container {
+  font-family: sans-serif;
+  max-width: 650px;
+  margin: 20px auto;
+  padding: 15px;
+}
+
+hr {
+  margin: 15px 0;
+}
+
+.error-banner {
+  color: #d9534f;
+  background: #fdf2f2;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #f5c6cb;
+}
+
+.member-form {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.age-input {
+  width: 70px;
+}
+
+.checkbox-label {
+  cursor: pointer;
+}
+
+.controls-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+button.active {
+  font-weight: bold;
+}
+
+.empty-state {
+  color: #666;
+  font-style: italic;
+}
+
+.card-grid {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.card {
+  border-radius: 6px;
+  padding: 12px;
+  width: 190px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card h4 {
+  margin: 0 0 8px 0;
+}
+
+.card p {
+  margin: 4px 0;
+}
+
+.card.available {
+  background-color: #e8f5e9;
+  border-left: 5px solid #2e7d32;
+}
+
+.card.unavailable {
+  background-color: #ffebee;
+  border-left: 5px solid #c62828;
+}
+
+.status-text {
+  font-weight: bold;
+}
+
+.available-text {
+  color: #2e7d32;
+}
+
+.unavailable-text {
+  color: #c62828;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.toggle-btn {
+  cursor: pointer;
+}
+
+.delete-btn {
+  background-color: #d9534f;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  padding: 2px 8px;
+}
+
+.delete-btn:hover {
+  background-color: #c9302c;
+}
+
+.member-list {
+  padding-left: 20px;
+}
+
+.member-list li {
+  margin-bottom: 8px;
+}
+
+.member-list .toggle-btn,
+.member-list .delete-btn {
+  margin-left: 8px;
+}

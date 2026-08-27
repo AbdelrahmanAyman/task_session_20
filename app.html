@@ -1,0 +1,102 @@
+<div class="app-container">
+  <h2>Team Manager</h2>
+
+  @if (errorMessage) {
+    <p class="error-banner">
+      {{ errorMessage }}
+    </p>
+  }
+
+  <form (submit)="$event.preventDefault(); addMember()" class="member-form">
+    <input [(ngModel)]="name" name="name" placeholder="Name" />
+    <input [(ngModel)]="age" name="age" type="number" placeholder="Age" class="age-input" />
+    
+    <select [(ngModel)]="department" name="department">
+      @for (dept of departments; track dept) {
+        <option [value]="dept">{{ dept }}</option>
+      }
+    </select>
+
+    <label class="checkbox-label">
+      <input type="checkbox" [(ngModel)]="isAvailable" name="isAvailable" /> Available
+    </label>
+
+    <button type="submit">Add Member</button>
+  </form>
+
+  <hr />
+
+  <div class="controls-container">
+    <div>
+      <label>Filter: </label>
+      <select [(ngModel)]="selectedDepartment">
+        <option value="All">All Departments</option>
+        @for (dept of departments; track dept) {
+          <option [value]="dept">{{ dept }}</option>
+        }
+      </select>
+    </div>
+
+    <div>
+      <button type="button" (click)="viewMode = 'card'" [class.active]="viewMode === 'card'">Card View</button>
+      <button type="button" (click)="viewMode = 'list'" [class.active]="viewMode === 'list'">List View</button>
+    </div>
+  </div>
+
+  <hr />
+
+  @if (members.length === 0) {
+    <p class="empty-state">No team members exist. Add someone using the form </p>
+  } @else if (filteredMembers.length === 0) {
+    <p class="empty-state">No team members match the selected department .</p>
+  } @else {
+    @switch (viewMode) {
+
+      @case ('card') {
+        <div class="card-grid">
+          @for (m of filteredMembers; track $index) {
+            <div class="card" [class.available]="m.isAvailable" [class.unavailable]="!m.isAvailable">
+              <h4>{{ m.name }}</h4>
+              <p><strong>Age:</strong> {{ m.age }}</p>
+              <p><strong>Dept:</strong> {{ m.department }}</p>
+              <p>
+                <strong>Status:</strong> 
+                <span class="status-text" [class.available-text]="m.isAvailable" [class.unavailable-text]="!m.isAvailable">
+                  {{ m.isAvailable ? 'Available' : 'Unavailable' }}
+                </span>
+              </p>
+              <div class="action-buttons">
+                <button type="button" (click)="m.isAvailable = !m.isAvailable" class="toggle-btn">
+                  Toggle Status
+                </button>
+                <button type="button" (click)="deleteMember($index)" class="delete-btn">
+                  Delete
+                </button>
+              </div>
+            </div>
+          }
+        </div>
+      }
+
+      @case ('list') {
+        <ul class="member-list">
+          @for (m of filteredMembers; track $index) {
+            <li>
+              <strong>{{ m.name }}</strong> - {{ m.department }} - 
+              <span class="status-text" [class.available-text]="m.isAvailable" [class.unavailable-text]="!m.isAvailable">
+                {{ m.isAvailable ? 'Available' : 'Unavailable' }}
+              </span>
+              <button type="button" (click)="m.isAvailable = !m.isAvailable" class="toggle-btn">
+                Toggle
+              </button>
+              <button type="button" (click)="deleteMember($index)" class="delete-btn">
+                Delete
+              </button>
+            </li>
+          }
+        </ul>
+      }
+
+    }
+  }
+</div>
